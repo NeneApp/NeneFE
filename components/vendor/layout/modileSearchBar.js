@@ -28,7 +28,7 @@ const SearchBarMobile = ({setOpenSearch,openSearch}) => {
         <input className='w-full bg-inherit h-full outline-none' value={searchMobile} onChange={e => setSearchMobile(e.target.value)} placeholder='search . . .'/>
         <Image src={searchicon} width={15} alt='search' onClick={submitSearch(searchMobile)} />     
       </div>
-      <Image src={closeicon} width={15} onClick={close} />
+      <Image src={closeicon} width={15} onClick={close} alt="search" />
      </div>
   )
 }

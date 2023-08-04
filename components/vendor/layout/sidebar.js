@@ -13,6 +13,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setAdminState } from "@/store/superAdminSlice";
+import AdminSidebar from "@/components/admin/layout/adminSidebar";
+
 const List = [
   { id: 1, page: "Product", icon: QrCode, route: "product" },
   { id: 2, page: "Orders", icon: ShoppingCart, route: "orders" },
@@ -35,8 +37,9 @@ const Sidebar = ({ openBar, setOpenBar }) => {
   const [adminDropArrowClick, setAdminDropArrowCLick] = useState(true);
   const onsetCurrent = (page) => setCurrent(page);
   const closeBar = () => setOpenBar(false);
-  console.log(current, pathname);
+  // console.log(current, pathname);
   const isSuperAdminPage = pathname.includes("/super-admin");
+  const isAdminPage = path[1] === "admin"
 
   const router = useRouter();
   const { replace, query } = router;
@@ -48,6 +51,9 @@ const Sidebar = ({ openBar, setOpenBar }) => {
       query: { status: AdminStatus },
     });
   }, []);
+
+  console.log(path[1] === "admin" ? `right path: ${[path]}` : `Wrong path: ${[path]}`);
+  // console.log(path);
 
   // performs updates to Admin account status
   //
@@ -110,6 +116,7 @@ const Sidebar = ({ openBar, setOpenBar }) => {
             <div className=" mx-3 px-6 border-l border-[#D7D7D7]">
               <ul className="flex flex-col gap-2">
                 <li
+                
                   onClick={() => updateAdminStatus("Active")}
                   className={`${
                     AdminStatus === "Active" ? "font-bold" : ""
@@ -137,6 +144,8 @@ const Sidebar = ({ openBar, setOpenBar }) => {
             </div>
           ) : null}
         </div>
+      ) : isAdminPage ? (
+        <AdminSidebar />
       ) : (
         <div className="py-6 flex flex-col gap-10">
           {List.map((list, i) => (

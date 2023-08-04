@@ -5,6 +5,7 @@ import Layout from "@/layout/layout";
 import VendorLayout from "@/components/vendor/layout";
 import StateProvider from "@/context/accountProvider";
 import { useRouter } from "next/router";
+import AdminLayout from "@/components/admin/layout/adminLayout";
 // import { FormProvider } from "react-hook-form";
 
 export default function App({ Component, pageProps }) {
@@ -31,6 +32,10 @@ export default function App({ Component, pageProps }) {
           ) : isCreateProductPath ? (
             getLayout(<Component {...pageProps} />)
           ) : pathname.includes("super-admin") ? (
+            <VendorLayout>
+              <Component {...pageProps} />
+            </VendorLayout>
+          ) : pathname.includes("admin") ? (
             <VendorLayout>
               <Component {...pageProps} />
             </VendorLayout>
